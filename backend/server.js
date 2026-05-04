@@ -13,6 +13,9 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.set('json replacer', (key, value) =>
+  typeof value === 'bigint' ? Number(value) : value
+);
 
 // API Routes
 app.use('/api/auth', require('./routes/auth'));

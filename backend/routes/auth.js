@@ -31,7 +31,7 @@ router.post('/signup', async (req, res) => {
       'INSERT INTO users (name, email, password) VALUES (?, ?, ?)'
     ).run(name.trim(), email.toLowerCase(), hashed);
 
-    const user = { id: result.lastInsertRowid, name: name.trim(), email: email.toLowerCase() };
+    const user = { id: Number(result.lastInsertRowid), name: name.trim(), email: email.toLowerCase() };
     const token = jwt.sign(user, JWT_SECRET, { expiresIn: '7d' });
 
     res.status(201).json({ token, user });
