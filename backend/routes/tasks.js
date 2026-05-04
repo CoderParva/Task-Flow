@@ -146,7 +146,7 @@ router.post('/', authenticateToken, (req, res) => {
     LEFT JOIN users u ON u.id = t.assigned_to
     LEFT JOIN users c ON c.id = t.created_by
     WHERE t.id = ?
-  `).get(result.lastInsertRowid);
+  `).get(Number(result.lastInsertRowid));
 
   res.status(201).json(task);
 });
@@ -181,6 +181,7 @@ router.put('/:id', authenticateToken, (req, res) => {
   }
 
   const isAdmin = isProjectAdmin(task.project_id, req.user.id);
+  // Use == (not ===) to handle number/string type differences from JWT vs SQLite
   const isAssignee = Number(task.assigned_to) === Number(req.user.id);
 
   // Members can only update status of their own tasks

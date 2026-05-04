@@ -40,36 +40,33 @@ router.post('/', authenticateToken, (req, res) => {
     return res.status(400).json({ error: 'Project name is required' });
   }
 
-  const createProject = () => {
-    db.exec('BEGIN');
-    try {
-      const result = db.prepare(
-        'INSERT INTO projects (name, description, created_by) VALUES (?, ?, ?)'
-      ).run(name.trim(), description || null, req.user.id);
+  try {
+    // Insert project
+    const result = db.prepare(
+      'INSERT INTO projects (name, description, created_by) VALUES (?, ?, ?)'
+    ).run(name.trim(), description || null, req.user.id);
 
-      // Creator becomes admin
-      db.prepare(
-        'INSERT INTO project_members (project_id, user_id, role) VALUES (?, ?, ?)'
-      ).run(result.lastInsertRowid, req.user.id, 'admin');
+    // Convert BigInt to Number (node:sqlite returns BigInt for lastInsertRowid)
+    const projectId = Number(result.lastInsertRowid);
 
-      db.exec('COMMIT');
-      return result.lastInsertRowid;
-    } catch (e) {
-      db.exec('ROLLBACK');
-      throw e;
-    }
-  };
+    // Creator becomes admin
+    db.prepare(
+      'INSERT INTO project_members (project_id, user_id, role) VALUES (?, ?, ?)'
+    ).run(projectId, req.user.id, 'admin');
 
-  const projectId = createProject();
-  const project = db.prepare(`
-    SELECT p.*, pm.role as user_role, u.name as creator_name
-    FROM projects p
-    JOIN project_members pm ON pm.project_id = p.id AND pm.user_id = ?
-    JOIN users u ON u.id = p.created_by
-    WHERE p.id = ?
-  `).get(req.user.id, projectId);
+    const project = db.prepare(`
+      SELECT p.*, pm.role as user_role, u.name as creator_name
+      FROM projects p
+      JOIN project_members pm ON pm.project_id = p.id AND pm.user_id = ?
+      JOIN users u ON u.id = p.created_by
+      WHERE p.id = ?
+    `).get(req.user.id, projectId);
 
-  res.status(201).json(project);
+    res.status(201).json(project);
+  } catch (err) {
+    console.error('Create project error:', err);
+    res.status(500).json({ error: 'Failed to create project' });
+  }
 });
 
 // GET /api/projects/:id – project details
