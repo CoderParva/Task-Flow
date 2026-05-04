@@ -195,7 +195,8 @@ function AddMemberModal({ projectId, onClose, onAdd }) {
 /* ─── Task Card ─────────────────────────────────────────────────────── */
 function TaskCard({ task, isAdmin, currentUserId, onEdit, onStatusUpdate, onDelete }) {
   const overdue = isOverdue(task.due_date) && task.status !== 'done';
-const canStatus = isAdmin || Number(task.assigned_to) === Number(currentUserId);  const canEdit   = isAdmin;
+  const canStatus = isAdmin || Number(task.assigned_to) === Number(currentUserId);
+  const canEdit   = isAdmin;
 
   return (
     <div className={`task-card priority-${task.priority} ${task.status === 'done' ? 'task-done' : ''}`}>
