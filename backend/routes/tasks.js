@@ -181,7 +181,7 @@ router.put('/:id', authenticateToken, (req, res) => {
   }
 
   const isAdmin = isProjectAdmin(task.project_id, req.user.id);
-  const isAssignee = task.assigned_to === req.user.id;
+  const isAssignee = Number(task.assigned_to) === Number(req.user.id);
 
   // Members can only update status of their own tasks
   if (!isAdmin && !isAssignee) {
