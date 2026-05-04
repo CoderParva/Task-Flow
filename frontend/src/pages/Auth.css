@@ -1,0 +1,179 @@
+.auth-page {
+  background: var(--bg-base);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 24px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Background accent orb */
+.auth-page::before {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  right: -10%;
+  width: 700px; height: 700px;
+  background: radial-gradient(ellipse, rgba(255,0,128,0.04) 0%, transparent 65%);
+  pointer-events: none;
+  animation: orb-drift 15s ease-in-out infinite alternate;
+}
+
+/* Horizontal scan line animation */
+.auth-scan {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  opacity: 0.6;
+  animation: scan-down 6s linear infinite;
+  pointer-events: none;
+}
+@keyframes scan-down {
+  from { top: 0; opacity: 0.6; }
+  80%  { opacity: 0.6; }
+  to   { top: 100%; opacity: 0; }
+}
+
+/* ─── Brand ──────────────────────────────────────────── */
+.auth-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.auth-logo {
+  align-items: center;
+  background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(0,212,255,0.05));
+  border: 1px solid var(--cyan);
+  border-radius: 14px;
+  box-shadow: var(--glow-cyan);
+  color: var(--cyan);
+  display: flex;
+  height: 52px;
+  justify-content: center;
+  width: 52px;
+  animation: logo-pulse 3s ease-in-out infinite;
+}
+
+@keyframes logo-pulse {
+  0%, 100% { box-shadow: 0 0 16px rgba(0,212,255,0.2), 0 0 40px rgba(0,212,255,0.06); }
+  50%       { box-shadow: 0 0 28px rgba(0,212,255,0.35), 0 0 60px rgba(0,212,255,0.12); }
+}
+
+.auth-brand-name {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--text-primary) 30%, var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.auth-brand-sub {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--cyan);
+  opacity: 0.6;
+  letter-spacing: 0.2em;
+  margin-top: 2px;
+}
+
+/* ─── Card ───────────────────────────────────────────── */
+.auth-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-bright);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: var(--glow-cyan), var(--shadow-lg);
+  backdrop-filter: blur(24px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top neon edge */
+.auth-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+}
+
+/* Corner decoration */
+.auth-card::after {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 200px; height: 200px;
+  background: radial-gradient(ellipse, rgba(0,212,255,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.auth-card-header {
+  margin-bottom: 32px;
+}
+
+.auth-card-header h2 {
+  font-size: 16px;
+  letter-spacing: 0.12em;
+  color: var(--cyan-bright);
+  margin-bottom: 6px;
+}
+
+.auth-card-header p {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+
+.auth-form { display: flex; flex-direction: column; gap: 20px; }
+
+.auth-submit {
+  width: 100%;
+  padding: 14px;
+  margin-top: 4px;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+}
+
+/* ─── Switch & Footer ────────────────────────────────── */
+.auth-switch {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-family: var(--font-mono);
+  margin-top: 24px;
+  text-align: center;
+}
+.auth-switch a {
+  color: var(--cyan);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--transition);
+}
+.auth-switch a:hover {
+  color: var(--cyan-bright);
+  text-shadow: 0 0 12px var(--cyan);
+}
+
+.auth-footer {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  margin-top: 36px;
+  text-align: center;
+  text-transform: uppercase;
+  opacity: 0.5;
+}

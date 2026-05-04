@@ -1,0 +1,144 @@
+.projects-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.project-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  text-decoration: none;
+  transition: all var(--transition);
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.project-card::after {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 180px; height: 180px;
+  background: radial-gradient(ellipse, rgba(0,212,255,0.04) 0%, transparent 70%);
+  pointer-events: none;
+  transition: opacity var(--transition);
+  opacity: 0;
+}
+
+.project-card:hover {
+  border-color: var(--border-bright);
+  transform: translateY(-3px);
+  box-shadow: var(--glow-cyan);
+}
+.project-card:hover::before { opacity: 0.6; }
+.project-card:hover::after  { opacity: 1; }
+
+/* ─── Card Top ───────────────────────────────────────── */
+.project-card-top {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.project-card-icon {
+  align-items: center;
+  background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(0,212,255,0.03));
+  border: 1px solid rgba(0,212,255,0.2);
+  border-radius: var(--radius);
+  color: var(--cyan);
+  display: flex;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 900;
+  height: 44px;
+  justify-content: center;
+  letter-spacing: 0.05em;
+  width: 44px;
+  box-shadow: 0 0 16px rgba(0,212,255,0.08);
+}
+
+/* ─── Card Content ───────────────────────────────────── */
+.project-card-name {
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.project-card-desc {
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ─── Card Meta ──────────────────────────────────────── */
+.project-card-meta {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  margin-top: 4px;
+}
+.project-card-meta span {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ─── Card Footer ────────────────────────────────────── */
+.project-card-footer {
+  border-top: 1px solid var(--border-subtle);
+  margin-top: 4px;
+  padding-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.project-card-creator {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+}
+
+/* Progress bar on card */
+.project-progress-bar {
+  height: 2px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: -4px;
+}
+.project-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyan), var(--success));
+  border-radius: 2px;
+  transition: width 0.8s ease;
+  box-shadow: 0 0 8px rgba(0,212,255,0.5);
+}
