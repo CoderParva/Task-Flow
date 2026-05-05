@@ -6,7 +6,7 @@ A full-stack collaborative task management web application built with Node.js, E
 
 ---
 
-## ✨ Features
+##  Features
 
 - **User Authentication** — Secure signup/login with JWT tokens (7-day expiry)
 - **Project Management** — Create projects, manage members with Admin/Member roles
@@ -19,7 +19,7 @@ A full-stack collaborative task management web application built with Node.js, E
 
 ---
 
-## 🏗 Architecture
+##  Architecture
 
 ```
 taskflow/
@@ -44,7 +44,7 @@ taskflow/
 
 ---
 
-## 🗄 Database Schema
+##  Database Schema
 
 ```sql
 users             – id, name, email, password (bcrypt), created_at
@@ -56,7 +56,7 @@ tasks             – id, title, description, project_id, assigned_to,
 
 ---
 
-## 🚀 Local Development Setup
+##  Local Development Setup
 
 ### Prerequisites
 - Node.js 18+
@@ -103,7 +103,7 @@ npm run dev:frontend
 
 ---
 
-## 📡 API Reference
+##  API Reference
 
 ### Authentication
 | Method | Endpoint | Description |
@@ -135,7 +135,7 @@ npm run dev:frontend
 
 ---
 
-## 🚂 Deployment on Railway
+##  Deployment on Railway
 
 ### Option A: One-Click Deploy (Recommended)
 
@@ -167,7 +167,7 @@ PORT=5000        # Railway sets this automatically
 
 ---
 
-## 🔑 Role-Based Access Control
+##  Role-Based Access Control
 
 | Action | Admin | Member |
 |--------|-------|--------|
@@ -192,7 +192,7 @@ PORT=5000        # Railway sets this automatically
 
 ---
 
-## 🧪 Testing the Application
+##  Testing the Application
 
 1. Sign up as **User A** → create a project → you become Admin
 2. Sign up as **User B** → note their email
@@ -203,7 +203,7 @@ PORT=5000        # Railway sets this automatically
 
 ---
 
-## 📦 Tech Stack
+##  Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
@@ -216,7 +216,7 @@ PORT=5000        # Railway sets this automatically
 
 ---
 
-## 📁 Key Design Decisions
+##  Key Design Decisions
 
 - **SQLite** chosen for zero-config deployment (no external database service required on Railway)
 - **Monorepo** structure: frontend built to `frontend/dist/`, served as static files by Express in production
